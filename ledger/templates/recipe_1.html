@@ -2,19 +2,18 @@
 
 {% load static %}
 
-{% block title %}Task List{% endblock %}
+{% block title %}Recipe 1{% endblock %}
 {% block content %}
     <ul>
         <li>
             {{ name }}
             <ul>
-                {% for ingredients in ingredients %}
+                {% for ingredient in ingredients %}
                 <li>
-                    {{ ingredients.name }}: {{ ingredients.quantity }}
+                    {{ ingredient.quantity }} {{ ingredient.name }}
                 </li>
                 {% endfor %}
             </ul>
-            <a href="{{ link }}">Recipe Link</a>
         </li>
     </ul>
 {% endblock %}
