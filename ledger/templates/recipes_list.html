@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Task List{% endblock %}
+{% block content %}
+    <ul>
+        {% for recipe in recipes %}
+        <li>
+            {{ recipe.name }}
+            <ul>
+                {% for ingredients in recipe.ingredients %}
+                <li>
+                    {{ ingredients.name }}: {{ ingredients.quantity }}
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{{ recipe.link }}">Recipe Link</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
