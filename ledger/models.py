@@ -5,8 +5,20 @@ from django.urls import reverse
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
 
+    def get_absolute_url(self):
+        return reverse('ledger:recipe-detail', args=[self.pk])
+
+    def __str__(self):
+        return self.name
+
 class Recipe(models.Model):
     name = models.CharField(max_length=100)
+
+    def get_absolute_url(self):
+        return reverse('ledger:recipe-detail', args=[self.pk])
+
+    def __str__(self):
+        return self.name
 
 class RecipeIngredient(models.Model):
     quantity = models.CharField(max_length=100)

@@ -5,9 +5,11 @@
 {% block title %}Recipe List{% endblock %}
 {% block content %}
     <ul>
-        {% for recipe in recipes %}
+        {% for recipe in object_list %}
         <li>
-            {{ recipe.name }}: <a href="{{ recipe.link }}">Recipe Link</a>
+            <a href="{{ recipe.get_absolute_url }}">
+                {{ recipe.name }}
+            </a>
         </li>
         {% endfor %}
     </ul>
