@@ -2,9 +2,11 @@
 
 {% load static %}
 
-{% block title %}Task{% endblock %}
+{% block title %}Recipe{% endblock %}
 {% block content %}
     <h1>{{ object.name }}</h1>
+
+    <p><strong>Author:</strong> {{ object.author.username }}</p>
     <ul>
         {% for ingredient in object.ingredients.all %}
         <li>
@@ -12,4 +14,7 @@
         </li>
         {% endfor %}
     </ul>
+
+    <p><small>Created Onn: {{ object.created_on }}</small></p>
+    <p><small>Updated On: {{ object.updated_on }}</small></p>
 {% endblock %}
