@@ -4,7 +4,7 @@
 
 {% block title %}Recipe{% endblock %}
 {% block content %}
-    <h1>{{ object.name }}</h1>
+    <h2>{{ object.name }}</h2>
 
     <p><strong>Author:</strong> {{ object.author.username }}</p>
     <ul>
@@ -17,4 +17,12 @@
 
     <p><small>Created On: {{ object.created_on }}</small></p>
     <p><small>Updated On: {{ object.updated_on }}</small></p>
+
+    {% if request.user.is_authenticated %}
+    <p>Welcome {{ request.user.username }}</p>
+    <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+    {% endif %}
 {% endblock %}
