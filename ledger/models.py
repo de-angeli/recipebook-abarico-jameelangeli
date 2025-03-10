@@ -19,7 +19,7 @@ class Recipe(models.Model):
         User,
         on_delete=models.CASCADE,
         null=True,
-        blank=True,
+        blank=True
     )
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
