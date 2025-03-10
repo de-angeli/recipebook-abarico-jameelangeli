@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 class Ingredient(models.Model):
@@ -11,14 +12,24 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name
 
+
 class Recipe(models.Model):
     name = models.CharField(max_length=100)
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
         return reverse('ledger:recipe-detail', args=[self.pk])
 
     def __str__(self):
         return self.name
+
 
 class RecipeIngredient(models.Model):
     quantity = models.CharField(max_length=100)
