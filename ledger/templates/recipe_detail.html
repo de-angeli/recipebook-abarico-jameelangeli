@@ -2,11 +2,13 @@
 
 {% load static %}
 
-{% block title %}Recipe{% endblock %}
+{% block title %}Recipe {{ object.name }}{% endblock %}
 {% block content %}
-    <h2>{{ object.name }}</h2>
+    <link href ="{% static 'main.css'%}" rel="stylesheet">
 
+    <h2>{{ object.name }}</h2>
     <p><strong>Author:</strong> {{ object.author.username }}</p>
+
     <ul>
         {% for ingredient in object.ingredients.all %}
         <li>
@@ -15,14 +17,25 @@
         {% endfor %}
     </ul>
 
+    <h3>Images</h3>
+        {% for image in object.images.all %}
+            <img src="{{ image.image.url }}" alt="{{ image.description }}">
+        {% endfor %}
+
     <p><small>Created On: {{ object.created_on }}</small></p>
     <p><small>Updated On: {{ object.updated_on }}</small></p>
 
     {% if request.user.is_authenticated %}
-    <p>Welcome {{ request.user.username }}</p>
-    <form method="POST" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
+        <h2>Welcome, {{ request.user.username }}</h2>
+
+        <p><a href="{% url 'ledger:recipe-add-image' pk=object.pk %}">Upload a new image</a></p>
+
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <p><a href="{% url 'login' %}">Login to upload images</a></p>
     {% endif %}
+
 {% endblock %}
